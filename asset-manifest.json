@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/skarb-ngo-react.github.io/static/css/main.de5018a9.chunk.css",
+    "main.js": "/skarb-ngo-react.github.io/static/js/main.4fc6a035.chunk.js",
+    "main.js.map": "/skarb-ngo-react.github.io/static/js/main.4fc6a035.chunk.js.map",
+    "runtime-main.js": "/skarb-ngo-react.github.io/static/js/runtime-main.286add96.js",
+    "runtime-main.js.map": "/skarb-ngo-react.github.io/static/js/runtime-main.286add96.js.map",
+    "static/js/2.330ee5c4.chunk.js": "/skarb-ngo-react.github.io/static/js/2.330ee5c4.chunk.js",
+    "static/js/2.330ee5c4.chunk.js.map": "/skarb-ngo-react.github.io/static/js/2.330ee5c4.chunk.js.map",
+    "index.html": "/skarb-ngo-react.github.io/index.html",
+    "static/css/main.de5018a9.chunk.css.map": "/skarb-ngo-react.github.io/static/css/main.de5018a9.chunk.css.map",
+    "static/js/2.330ee5c4.chunk.js.LICENSE.txt": "/skarb-ngo-react.github.io/static/js/2.330ee5c4.chunk.js.LICENSE.txt",
+    "static/media/MainPageContent.scss": "/skarb-ngo-react.github.io/static/media/Puzzle1.4f6da6ec.png",
+    "static/media/Registration.scss": "/skarb-ngo-react.github.io/static/media/Puzzle3.daa1043b.png",
+    "static/media/logo_red_300px.434df569.svg": "/skarb-ngo-react.github.io/static/media/logo_red_300px.434df569.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.286add96.js",
+    "static/js/2.330ee5c4.chunk.js",
+    "static/css/main.de5018a9.chunk.css",
+    "static/js/main.4fc6a035.chunk.js"
+  ]
+}
