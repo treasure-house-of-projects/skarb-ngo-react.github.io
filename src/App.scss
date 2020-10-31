@@ -1,0 +1,109 @@
+html, #root {
+  height: 100%;
+}
+
+body {
+  background-color: #FFF;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  height: 100%;
+}
+
+.title {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 60px;
+  text-align: center;
+  letter-spacing: -0.015em;
+
+  &--small {
+    font-size: 30px;
+  }
+
+  &--red {
+    background: -webkit-linear-gradient(0deg, #D71541, #635A8E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &--white {
+    background: -webkit-linear-gradient(0deg, #FFFFFF, #D6EDDB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &--orange {
+    background: -webkit-linear-gradient(0deg, #F14000, #E00000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.button {
+  height: 40px;
+  width: 150px;
+  background: #FFFFFF;
+  border-radius: 22px;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 17px;
+  justify-content: center;
+  letter-spacing: -0.015em;
+  color: #AE2342;
+  outline: none;
+  border-color: #AE2342;
+
+  &--center {
+    display: flex;
+    align-items: center;
+    margin: 20px auto 60px auto;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: #FFF6F8;
+    font-weight: bold;
+  }
+
+  &:active {
+    -moz-box-shadow: inset 4px 4px 3px #0000003a;
+    -webkit-box-shadow: inset 4px 4px 3px #0000003a;
+    box-shadow: inset 4px 4px 3px #0000003a;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &--orange {
+    background: #F14000;
+    width: 166px;
+    border: none;
+    color: white;
+    margin: 35px auto;
+    &:hover {
+        background-color: #D71541;
+    }
+  }
+
+  &:disabled {
+    background: #BEBEBE;
+    font-weight: 500;
+  }
+}
+
+.backgr--two_tone {
+  margin: 0 5vw;
+  background: linear-gradient(90deg, rgba(99, 90, 142, 0.66) 0%, rgba(215, 21, 65, 0.66) 100%);
+}
+
+.second_backgr {
+  background: linear-gradient(90deg, rgba(99, 90, 142, 0.5) 0%, rgba(215, 21, 65, 0.5) 100%);
+}
+
+

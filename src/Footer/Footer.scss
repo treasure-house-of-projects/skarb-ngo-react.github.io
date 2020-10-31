@@ -1,0 +1,21 @@
+.footer {
+    background: linear-gradient(90deg, rgba(99, 90, 142, 0.66) 0%, rgba(215, 21, 65, 0.66) 100%);
+    width: 100%;
+    margin-top: auto;
+    padding: 10px 5vw;
+    display: flex;
+    justify-content: space-between;
+
+    &__info {
+        display: flex;
+        align-items: center;
+        p {
+            margin: 0 0 0 5vw;
+            font-style: normal;
+            font-size: 18px;
+            line-height: 21px;
+            letter-spacing: -0.015em;
+            color: #FFFFFF;
+        }
+    }
+}

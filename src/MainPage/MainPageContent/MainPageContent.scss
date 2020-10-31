@@ -1,0 +1,55 @@
+.content {
+    margin: 0 5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: url('../../Puzzle1.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    .info {
+        width: 800px;
+        margin: 0 auto;
+        &_title {
+            margin: 120px 40px 30px 40px;
+            font-size: 63px;
+            line-height: 60px;
+        }
+
+        &_text {
+            margin: auto 40px;
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 29px;
+            text-align: justify;
+        }
+    }
+
+    .statistic {
+        margin: 122px auto;
+        width: 305px;
+        display: flex;
+        flex-direction: column;
+
+        &_tasks {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 30px;
+            line-height: 35px;
+            text-align: center;
+            color: #F14000;
+            margin-bottom: 0;
+
+            &_desc {
+                margin: 3px auto 0 auto;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 20px;
+                line-height: 20px;
+                text-align: center;
+                color: #000000;
+            }
+        }
+    }
+}
