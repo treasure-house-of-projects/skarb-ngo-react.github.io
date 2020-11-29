@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Registration.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-import Select from 'react-select'
+import { faEye, faEyeSlash, faTimes } from '@fortawesome/free-solid-svg-icons'
 import * as CryptoJS from 'crypto-js'
-import axios from 'axios'
 
-function VolunteerRegistration({localization}) {
+function OrganizationRegistration({localization}) {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [fname, setFname] = useState("");
@@ -14,26 +12,13 @@ function VolunteerRegistration({localization}) {
     const [sex, setSex] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-    const [categorie, setCategorie] = useState([]);
-    const [selectedCategorie, setSelectedCategorie] = useState([]);
-    const [reactSelectedCategories, setReactSelectedCategories] = useState([]);
-    const [about, setAbout] = useState("");
+    const [organizationName, setOrganizationName] = useState("");
+    const [organizationPosition, setOrganizationPosition] = useState("");
+    const [organizationLink, setOrganizationLink] = useState("");
+    const [organizationAbout, setOrganizationAbout] = useState("");
     const [isVisibleOne, setIsVisibleOne] = useState(false);
     const [isVisibleTwo, setIsVisibleTwo] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
-
-    useEffect(() => {
-        fetch('http://back-dev.skarb.ngo/v1.0/categories/volunteer')
-            .then(res => res.json())
-            .then(
-                (res) => { 
-                    let loadedCategories = []
-                    res.map(cat => loadedCategories.push({value: cat.id, label: cat.name}))
-                    setCategorie(loadedCategories)
-                    console.log(categorie)
-                    console.log(loadedCategories)
-                })
-    }, []);
     
     const handleSubmit = event => {
         event.preventDefault()
@@ -42,62 +27,16 @@ function VolunteerRegistration({localization}) {
 
     const finishSubmit = event => {
         event.preventDefault()
-        setCurrentStep(currentStep + 1)
-        let passwordEnc = CryptoJS.AES.encrypt(password, 'KeyForPassword77').toString()
-        let passwordConfirmEnc = CryptoJS.AES.encrypt(passwordConfirm, 'KeyForPassword77').toString()
-        let passwordDec = CryptoJS.AES.decrypt(passwordEnc, 'KeyForPassword77');
-        let passwordConfirmDec = CryptoJS.AES.decrypt(passwordConfirmEnc, 'KeyForPassword77');
-        console.log(passwordConfirmEnc, passwordEnc)
-        console.log(passwordConfirmDec.toString(CryptoJS.enc.Utf8), passwordDec.toString(CryptoJS.enc.Utf8))
-
-        axios.post(`http://back-dev.skarb.ngo/v1.0/users/register/volunteers`, {
-            about: about,
-            categoryIds: selectedCategorie,
-            confirmPassword: passwordConfirm,
-            email: email,
-            firstName: fname,
-            lastName: lname,
-            locale: "EN",
-            password: password,
-            phone: phone,
-            sex: sex
-        })
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
-        .catch(error => {
-            console.log(error.message);
-            console.log(error);
-        });
-
-        
-        // fetch('http://back-dev.skarb.ngo/v1.0/users/register/volunteers', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         // 'Access-Control-Allow-Origin': '*',
-        //         // 'Access-Control-Allow-Methods': 'POST,GET,PUT,DELETE',
-        //         // 'Access-Control-Allow-Headers': 'Authorization, Lang',
-        //     },
-        //     body: JSON.stringify({
-        //         about: about,
-        //         categoryIds: selectedCategorie,
-        //         confirmPassword: passwordConfirmEnc,
-        //         email: email,
-        //         firstName: fname,
-        //         lastName: lname,
-        //         locale: "EN",
-        //         password: passwordEnc,
-        //         phone: phone,
-        //         sex: sex,
-        //     })
-        // })
-        
-        // .then((response)=>response.json())
-
-
-    };
+        // function isTooBig(value) {
+        //     return value.size >= 3000000
+        // }
+        // let tooBigFiles = file.filter(isTooBig)
+        // if (file.length > 3) {
+        // } else if (tooBigFiles.length > 0) {
+        // } else {
+        //     setCurrentStep(currentStep + 1)
+        // }
+    }
 
     function backwards() {
         setCurrentStep(currentStep - 1)
@@ -116,20 +55,85 @@ function VolunteerRegistration({localization}) {
         })
     }
 
+    // function encrypt(message = '', key = 'KeyForPassword77'){
+    //     var message = CryptoJS.AES.encrypt(message, key);
+    //     console.log(message.toString())
+    // }
+    
+    // function decrypt(message = '', key = ''){
+    //     var code = CryptoJS.AES.decrypt(message, key);
+    //     var decryptedMessage = code.toString(CryptoJS.enc.Utf8);
+    
+    //     return decryptedMessage;
+    // }
+    // console.log(encrypt('Hello World'));
+    // console.log(decrypt('U2FsdGVkX1/0oPpnJ5S5XTELUonupdtYCdO91v+/SMs='))
+
     return (
         <div className='registration container'>
+            <div className="row justify-content-md-center registration-stage" style={currentStep === 3 ? {display: 'none'} : {}}>
+                <div className="col-md-auto registration-stage--inline">
+                    <div className="circle" 
+                        style={
+                            currentStep === 1 ?
+                            {backgroundColor: "#635A8E",
+                            color: "#FFFFFF"} :
+                            {backgroundColor: "#D9D2F8",
+                            color: "#444156"}
+                        }    
+                    >
+                        1
+                    </div>
+                    <p className="stage-descript" 
+                        style={
+                            currentStep === 1 ?
+                            {textDecoration: "underline",
+                            color: "#444156",
+                            fontWeight: "bold"} :
+                            {textDecoration: "none",
+                            color: "#444156"}
+                        }  
+                    >
+                        Создание личного кабинета
+                    </p>
+                </div>
+                <div class="col-md-auto registration-stage--inline">
+                    <div className="circle" 
+                        style={
+                            currentStep === 2 ?
+                            {backgroundColor: "#635A8E",
+                            color: "#FFFFFF"} :
+                            {backgroundColor: "#D9D2F8",
+                            color: "#444156"}
+                        }  
+                    >
+                        2
+                    </div>
+                    <p className="stage-descript" 
+                        style={
+                            currentStep === 2 ?
+                            {textDecoration: "underline",
+                            color: "#444156",
+                            fontWeight: "bold"} :
+                            {textDecoration: "none",
+                            color: "#444156"}
+                        }  
+                    >
+                        Ввод данных об организации
+                    </p>
+                </div>
+            </div>
             <div className="row justify-content-md-center">
                 <title className='title title--red col-10'>
-                    {currentStep === 1 ? localization.registration.panel.header.user.main : 
-                    currentStep === 2 ? localization.startToWrite : localization.registration.success}
+                    {currentStep === 3 ? localization.registration.success : localization.partner.registration.panel.header.main}
                 </title>
             </div>
             <div className="row justify-content-md-center">
                 <p className='login_page__info col-10'>
-                    {currentStep === 1 ? localization.registration.panel.header.sec : 
-                    currentStep === 2 ? localization.startToWriteLater : localization.registration.successTwo}
+                    {currentStep === 1 || currentStep === 2 ? localization.registration.panel.header.sec : localization.registration.successTwo}
                 </p>
             </div>
+            <p className='login_page__info'></p>
             <StepOne 
                 currentStep={currentStep} 
                 setCurrentStep={setCurrentStep}
@@ -161,37 +165,18 @@ function VolunteerRegistration({localization}) {
                 currentStep={currentStep} 
                 setCurrentStep={setCurrentStep}
                 localization={localization}
-                categorie={categorie}
-                setCategorie={setCategorie}
-                selectedCategorie={selectedCategorie}
-                setSelectedCategorie={setSelectedCategorie}
-                reactSelectedCategories={reactSelectedCategories}
-                setReactSelectedCategories={setReactSelectedCategories}
-                about={about}
-                setAbout={setAbout}
-                // email={email}
-                // setEmail={setEmail}
-                // phone={phone}
-                // setPhone={setPhone}
-                // fname={fname}
-                // setFname={setFname}
-                // lname={lname}
-                // setLname={setLname}
-                // sex={sex}
-                // setSex={setSex}
-                // password={password}
-                // setPassword={setPassword}
-                // passwordConfirm={passwordConfirm}
-                // setPasswordConfirm={setPasswordConfirm}
+                organizationName={organizationName}
+                setOrganizationName={setOrganizationName}
+                organizationPosition={organizationPosition}
+                setOrganizationPosition={setOrganizationPosition}
+                organizationLink={organizationLink}
+                setOrganizationLink={setOrganizationLink}
+                organizationAbout={organizationAbout}
+                setOrganizationAbout={setOrganizationAbout}
 
                 backwards={backwards}
                 validation={validation}
                 handleSubmit={handleSubmit}
-                finishSubmit={finishSubmit}
-                isVisibleOne={isVisibleOne}
-                setIsVisibleOne={setIsVisibleOne}
-                isVisibleTwo={isVisibleTwo}
-                setIsVisibleTwo={setIsVisibleTwo}
             ></StepTwo>
         </div>
     )
@@ -276,7 +261,7 @@ function StepOne({
                             required
                         ></input>
                         <div className="invalid-feedback">
-                            {fname === '' ? localization.validationMessages.NotEmpty : `${localization.first.name} ${localization.last.error}` }
+                            { fname === '' ? localization.validationMessages.NotEmpty : `${localization.first.name} ${localization.last.error}` }
                         </div>
                         <small id="emailHelp" className="form-text text-muted">{localization.last.info}</small>
                     </div>
@@ -306,8 +291,8 @@ function StepOne({
                                 <input 
                                     type="radio" 
                                     name="size" 
-                                    onChange={() => setSex("MALE")}
-                                    checked={sex === "MALE" ? true : false}
+                                    onChange={() => setSex("male")}
+                                    checked={sex === "male" ? true : false}
                                     required
                                 />
                                 <span>{localization.sex.mname}</span>
@@ -321,8 +306,8 @@ function StepOne({
                                 <input 
                                     type="radio" 
                                     name="size" 
-                                    onChange={() => setSex("FEMALE")}
-                                    checked={sex === "FEMALE" ? true : false}
+                                    onChange={() => setSex("female")}
+                                    checked={sex === "female" ? true : false}
                                     required
                                 />
                                 <span>{localization.sex.fname}</span>
@@ -398,93 +383,95 @@ function StepOne({
 function StepTwo({
     currentStep,
     localization, 
-    categorie,
-    setCategorie,
-    selectedCategorie,
-    setSelectedCategorie,
-    reactSelectedCategories,
-    setReactSelectedCategories,
-    email, 
-    setEmail,
-    phone, 
-    setPhone,
-    fname, 
-    setFname,
-    lname, 
-    setLname,
-    sex, 
-    setSex,
-    password, 
-    setPassword,
-    passwordConfirm,
-    setPasswordConfirm,
-    about,
-    setAbout,
+    organizationName,
+    setOrganizationName,
+    organizationPosition,
+    setOrganizationPosition,
+    organizationLink,
+    setOrganizationLink,
+    organizationAbout,
+    setOrganizationAbout,
 
     backwards,
     validation,
     handleSubmit,
-    finishSubmit,
-    isVisibleOne,
-    setIsVisibleOne,
-    isVisibleTwo,
-    setIsVisibleTwo
 }) {
 
     if (currentStep !== 2) {
         return null
     } 
     return(
-        <form className="container needs-validation" noValidate onClick={() => validation()} onSubmit={finishSubmit}>
+        <form className="container needs-validation" noValidate onClick={() => validation()} onSubmit={handleSubmit}>
             <div className="row justify-content-center">
-                    <label htmlFor="exampleInputEmail1" className="form-control__label col-md-8">Задачи из каких областей вам интересны:</label>
-            </div>
-            <div className="row justify-content-center">
-                <div className="form-row col-md-8">
-                    <Select
-                        isMulti
-                        defaultValue={reactSelectedCategories}
-                        name="sectedCategories"
-                        options={selectedCategorie.length < 8 || selectedCategorie === null ? categorie :
-                            [
-                                {
-                                    label: 'Reached max items',
-                                    value: undefined,
-                                    isDisabled: true,
-                                },
-                            ]}
-                        className="basic-multi-select"
-                        classNamePrefix="select"
-                        closeMenuOnSelect={false}
-                        maxMenuHeight="400px"
-                        onChange={(v) => {
-                            if (v === null) {
-                                setSelectedCategorie([])
-                                setReactSelectedCategories([])
-                            } else {
-                                setReactSelectedCategories(v)
-                                let idCat = []
-                                v.map(cat => idCat.push(cat.value))
-                                console.log(v)
-                                setSelectedCategorie(idCat)
-                            }
-                        }}
-                    ></Select>
-                </div>  
+                <div className="form-group col-md-8">
+                    <label htmlFor="exampleInputEmail1" className="form-control__label">{localization.organization.name}:</label>
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        id="exampleInputOrgName" 
+                        aria-describedby="OrgName"
+                        pattern="[a-zA-Z\u0400-\u04ff\s]{1,50}" 
+                        value={organizationName}
+                        onChange={(e) => setOrganizationName(e.target.value)}
+                        required
+                    ></input>
+                    <div className="invalid-feedback">
+                    {organizationName === '' ? localization.validationMessages.NotEmpty : `${localization.organization.name} ${localization.last.error}` } 
+                    </div>
+                    <small id="emailHelp" className="form-text text-muted">Должно совпадать с названием организации в регистрации</small>
+                </div>
             </div>
             <div className="row justify-content-center">
                 <div className="form-group col-md-8">
-                    <label htmlFor="validationTextarea" className="form-control__label">Расскажите о себе:</label>
-                    <textarea 
-                        class="form-control" 
-                        id="validationTextarea" 
-                        maxLength={600} 
-                        value={about}
-                        onChange={(e) => setAbout(e.target.value)}
-                    ></textarea>
-                    <small id="emailHelp" className="form-text text-muted">Расскажите о своем опыте и интересах</small>
+                    <label htmlFor="exampleInputEmail1" className="form-control__label">{localization.organization.position}:</label>
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        id="exampleInputOrgPosition" 
+                        aria-describedby="OrgPosition"
+                        pattern="[a-zA-Z\u0400-\u04ff\s]{1,50}" 
+                        value={organizationPosition}
+                        onChange={(e) => setOrganizationPosition(e.target.value)}
+                        required
+                    ></input>
+                    <div className="invalid-feedback">
+                    {organizationPosition === '' ? localization.validationMessages.NotEmpty : `${localization.organization.name} ${localization.last.error}` }
+                    </div>
+                    <small id="emailHelp" className="form-text text-muted">Будет отображаться в профиле организации и задачах</small>
                 </div>
             </div>
+            <div className="row justify-content-center">
+                <div className="form-group col-md-8">
+                    <label htmlFor="exampleInputEmail1" className="form-control__label">{localization.organization.site.url}:</label>
+                    <input 
+                        type="url"  
+                        className="form-control" 
+                        id="exampleInputOrgLink" 
+                        aria-describedby="OrgLink"
+                        pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?"
+                        size="50"
+                        value={organizationLink}
+                        onChange={(e) => setOrganizationLink(e.target.value)}
+                    ></input>
+                    <div className="invalid-feedback">
+                        {localization.validationMessages.SiteUrl}
+                    </div>
+                    <small id="emailHelp" className="form-text text-muted">Будет отображаться в профиле организации на сайте</small>
+                </div>
+            </div>
+            <div className="row justify-content-center">
+                <div className="form-group col-md-8">
+                    <label htmlFor="validationTextarea" className="form-control__label">{localization.about.organization}:</label>
+                    <textarea 
+                        class="form-control" 
+                        id="validationTextareaOrgAbout" 
+                        maxLength={600} 
+                        value={organizationAbout}
+                        onChange={(e) => setOrganizationAbout(e.target.value)}
+                    ></textarea>
+                    <small id="emailHelp" className="form-text text-muted">Расскажите, чем занимается организация</small>
+                </div>
+            </div>         
             <div className="row justify-content-center">
                 <button type="button" className="button" onClick={() => backwards()}>{localization.button.back}</button>
                 <button type="submit" className="button button--orange">{localization.button.continue}</button>
@@ -493,4 +480,4 @@ function StepTwo({
     )
 }
 
-export default VolunteerRegistration
+export default OrganizationRegistration

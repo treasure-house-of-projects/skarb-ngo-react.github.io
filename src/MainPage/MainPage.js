@@ -6,15 +6,15 @@ import News from './News/NewsContainer'
 import Participants from './Participants/ParticipantsContainer'
 import OrgAndPart from './OrgAndPart/OrgAndPart'
 
-function MainPage() {
+function MainPage({localization}) {
   return (
       <div>
-        <MainPageContent></MainPageContent>
-        <Benefits></Benefits>
-        <TasksContainer></TasksContainer>
-        <News></News>
-        <Participants></Participants>
-        <OrgAndPart></OrgAndPart>
+        <MainPageContent localization={localization}></MainPageContent>
+        <Benefits localization={localization}></Benefits>
+        <TasksContainer localization={localization}></TasksContainer>
+        <News localization={localization}></News>
+        <Participants localization={localization}></Participants>
+        <OrgAndPart localization={localization}></OrgAndPart>
       </div>
   )
 }

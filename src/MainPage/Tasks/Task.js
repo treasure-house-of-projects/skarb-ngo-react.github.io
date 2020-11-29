@@ -5,7 +5,7 @@ import { faCircle } from '@fortawesome/free-solid-svg-icons'
 
 const awesomeAngleDown = <FontAwesomeIcon className="fa-angle-down" icon={faCircle}/>
 
-function Tasks() {
+function Tasks({localization}) {
     const [tasks, setTasks] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
 
@@ -37,11 +37,11 @@ function Tasks() {
         <title className='task__title'>{truncateString(task.name, 32)}</title>
         <p className='task__type'>{task.status}</p>
         <ul>
-            <li className='task__description'>{awesomeAngleDown}<strong>Дедлайн</strong> - {task.deadline}</li>
-            <li className='task__description'>{awesomeAngleDown}<strong>Вознаграждение</strong> - {task.reward === null ? 'упоминание на сайте' : task.reward}</li>
-            <li className='task__description'>{awesomeAngleDown}<strong>Категории</strong> - {task.categories.map((cat) => cat + '; ')}</li>
+            <li className='task__description'>{awesomeAngleDown}<strong>{localization.task.info.deadline}</strong> - {task.deadline}</li>
+            <li className='task__description'>{awesomeAngleDown}<strong>{localization.task.reward}</strong> - {task.reward === null ? 'упоминание на сайте' : task.reward}</li>
+            <li className='task__description'>{awesomeAngleDown}<strong>{localization.task.categories}</strong> - {task.categories.map((cat) => cat + '; ')}</li>
         </ul>
-        <p className='task__button'>Узнать подробнее</p>
+        <p className='task__button'>{localization.task.to}</p>
     </div>
     )}
 }

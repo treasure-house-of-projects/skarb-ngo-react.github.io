@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 // import './TasksContainer.scss'
 
-function Participant() {
+function Participant({localization}) {
     const [users, setUsers] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
 

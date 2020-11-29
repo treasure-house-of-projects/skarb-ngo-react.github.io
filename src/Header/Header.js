@@ -1,55 +1,73 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Link } from "react-router-dom"
 import './Header.scss'
 import LoginPanel from '../LoginPanel/LoginPanel'
 import logo from './logo_red_300px.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faLanguage, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+import lang from '../language'
+
 
 const awesomeAngleDown = <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown}/>
 
-function Header() {
+function Header({language, onLanguageChange, localization}) {
     const [isVisible, setIsVisible] = useState(false)
+
+    const changeToUA = useCallback(() => {
+        onLanguageChange(lang.UA)
+        localStorage.setItem('language', 'UA')
+    }, [onLanguageChange])
+
+    const changeToRU = useCallback(() => {
+        onLanguageChange(lang.RU)
+        localStorage.setItem('language', 'RU')
+    }, [onLanguageChange])
+
+    const changeToEN = useCallback(() => {
+        onLanguageChange(lang.EN)
+        localStorage.setItem('language', 'EN')
+    }, [onLanguageChange])
+
     return (
         <div>
         <header className='header'>
             <div className='header--normal'>
                 <img src={logo} alt='logo' className='header__logo--red'></img>
                 <nav className='header__navigation'>
-                    <Link to="/" className='header__dropdown'>Главная</Link>
-                    <div className='header__dropdown'>О проекте &#160;{awesomeAngleDown}
+                    <Link to="/" className='header__dropdown'>{localization.label.main}</Link>
+                    <div className='header__dropdown'>{localization.label.about.project} &#160;{awesomeAngleDown}
                         <div className="header__dropdown-content">
-                            <Link to="/about" className='header__dropdown-content__link'>О проекте</Link>
-                            <Link to="/news" className='header__dropdown-content__link'>Новости</Link>
-                            <Link to="/rules" className='header__dropdown-content__link'>Правила</Link>
-                            <Link to="/help" className='header__dropdown-content__link'>Помощь</Link>
-                            <Link to="/advice" className='header__dropdown-content__link'>Советы НКО</Link>
+                            <Link to="/about" className='header__dropdown-content__link'>{localization.label.about.project}</Link>
+                            <Link to="/news" className='header__dropdown-content__link'>{localization.label.news}</Link>
+                            <Link to="/rules" className='header__dropdown-content__link'>{localization.label.rules}</Link>
+                            <Link to="/help" className='header__dropdown-content__link'>{localization.label.help}</Link>
+                            <Link to="/advice" className='header__dropdown-content__link'>{localization.label.tips}</Link>
                         </div>
                     </div>
-                    <div className='header__dropdown'>Участники &#160;{awesomeAngleDown}
+                    <div className='header__dropdown'>{localization.label.members} &#160;{awesomeAngleDown}
                         <div className="header__dropdown-content">
-                            <Link to="/volunteers" className='header__dropdown-content__link'>Волонтеры</Link>
-                            <Link to="/organizations" className='header__dropdown-content__link'>Организации</Link>
-                            <Link to="/partners" className='header__dropdown-content__link'>Партнеры</Link>
+                            <Link to="/volunteers" className='header__dropdown-content__link'>{localization.label.volunteers}</Link>
+                            <Link to="/organizations" className='header__dropdown-content__link'>{localization.label.organizations}</Link>
+                            <Link to="/partners" className='header__dropdown-content__link'>{localization.label.partners}</Link>
                         </div>
                     </div>
-                    <div className='header__dropdown'>Задачи &#160;{awesomeAngleDown}
+                    <div className='header__dropdown'>{localization.label.tasks} &#160;{awesomeAngleDown}
                         <div className="header__dropdown-content">
-                            <Link to="/tasks-for-volunteers" className='header__dropdown-content__link'>Для волонтеров</Link>
-                            <Link to="/tasks-for-partners" className='header__dropdown-content__link'>Для партеров</Link>
-                            <Link to="/success-stories" className='header__dropdown-content__link'>Истории успеха</Link>
+                            <Link to="/tasks-for-volunteers" className='header__dropdown-content__link'>{localization.label.search.tasks.volunteer}</Link>
+                            <Link to="/tasks-for-partners" className='header__dropdown-content__link'>{localization.label.search.tasks.partner}</Link>
+                            <Link to="/success-stories" className='header__dropdown-content__link'>{localization.label.successStory}</Link>
                         </div>
                     </div>
                 </nav>
                 <div className='header__dropdown--thin'>
                     <FontAwesomeIcon className="fa fa-language" icon={faLanguage}></FontAwesomeIcon>
                     <div className="header__dropdown-content--thin">
-                        <Link to="/ru" className='header__dropdown-content__link'>Рус</Link>
-                        <Link to="/ua" className='header__dropdown-content__link'>Укр</Link>
-                        <Link to="/en" className='header__dropdown-content__link'>Eng</Link>
+                        <div className='header__dropdown-content__link' onClick={changeToRU}>{localization.header.lang.ru}</div>
+                        <div className='header__dropdown-content__link' onClick={changeToUA}>{localization.header.lang.ua}</div>
+                        <div className='header__dropdown-content__link' onClick={changeToEN}>{localization.header.lang.eng}</div>
                     </div>
                 </div>
-                <LoginPanel></LoginPanel>
+                <LoginPanel localization={localization}></LoginPanel>
             </div>
 
             <div className='header--thin'>
@@ -59,25 +77,25 @@ function Header() {
                     <img src={logo} alt='logo' className='header__menu__logo--red'></img>
                     <FontAwesomeIcon className="fa fa-times" icon={faTimes} onClick={() => setIsVisible(false)}></FontAwesomeIcon>
                     <div className='header__menu__all_links'>
-                        <p><strong>Главная</strong></p>
+                        <Link to="/" className='links'><strong>{localization.label.main}</strong></Link>
                         <hr></hr>
-                        <p><strong>О проекте</strong></p>
-                        <p>Новости</p>
-                        <p>Правила</p>
-                        <p>Помощь</p>
-                        <p>Советы НКО</p>
+                        <Link to="/" className='links'>{localization.label.about.project}</Link>
+                        <Link to="/" className='links'>{localization.label.news}</Link>
+                        <Link to="/" className='links'>{localization.label.rules}</Link>
+                        <Link to="/" className='links'>{localization.label.help}</Link>
+                        <Link to="/" className='links'>{localization.label.tips}</Link>
                         <hr></hr>
-                        <p><strong>Участники</strong></p>
-                        <p>Волонтеры</p>
-                        <p>Организации</p>
-                        <p>Партнеры</p>
+                        <Link to="/" className='links'><strong>{localization.label.members}</strong></Link>
+                        <Link to="/" className='links'>{localization.label.volunteers}</Link>
+                        <Link to="/" className='links'>{localization.label.organizations}</Link>
+                        <Link to="/" className='links'>{localization.label.partners}</Link>
                         <hr></hr>
-                        <p><strong>Задачи</strong></p>
-                        <p>Для волонтеров</p>
-                        <p>Для партеров</p>
-                        <p>Истории успеха</p>
+                        <Link to="/" className='links'><strong>{localization.label.tasks}</strong></Link>
+                        <Link to="/" className='links'>{localization.label.search.tasks.volunteer}</Link>
+                        <Link to="/" className='links'>{localization.label.search.tasks.partner}</Link>
+                        <Link to="/" className='links'>{localization.label.successStory}</Link>
                         <hr></hr>
-                        <LoginPanel></LoginPanel>
+                        <LoginPanel localization={localization}></LoginPanel>
                     </div>
                 </div>
             </div>

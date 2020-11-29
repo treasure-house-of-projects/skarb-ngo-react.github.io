@@ -1,42 +1,26 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
 .form-control {
-    border: none;
+    border: solid 1px #AE2342;
     border-radius: 6px;
     height: 52px;
-
     font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
     line-height: 36px;
     letter-spacing: -0.015em;
-
     color: #000000;
 
     &:focus  {
         box-shadow: none;
-        border: solid 1px transparent;
+        border: solid 2px #AE2342;
         color: #000000;
     }
 
-    &__background {
-        position: relative;
-        $border: 1px;
-        color: #FFF;
-        background-clip: padding-box;
-        border: solid $border transparent;
-        border-radius: 6px;
-
-        &:before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            z-index: -1;
-            margin: -$border;
-            border-radius: inherit;
-            background: linear-gradient(to right, #D71541, #635A8E);
-        }
+    &:focus + .input-group-append  {
+        box-shadow: none;
+        border: solid 2px #AE2342;
     }
 
     &__label {
@@ -49,6 +33,45 @@
     }
 }
 
+.form-control:disabled {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 36px;
+    letter-spacing: -0.015em;
+    color: #585858;
+    height: 29px;
+    border: none;
+    border-radius: 0%;
+    border-bottom: 1px solid #585858;
+    background-color: transparent;
+    padding-left: 0;
+
+    &.is-invalid + .input-group-append {
+       border-color: #585858;
+    }
+
+    & + .input-group-append {
+        border: none;
+        border-radius: 0%;
+        border-bottom: 1px solid #585858;
+        background-color: transparent;
+
+        .input-group-text {
+            background-color: transparent;
+        }
+    }
+
+}
+
+.input-file-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #AE2342;
+}
+
 .form-check {
     &-label {
         font-family: Montserrat;
@@ -59,4 +82,24 @@
         color: #000000;
         margin-left: 5px;
     }
+}
+
+.input-group > .input-group-append > .input-group-text {
+    border-radius: 6px;
+}
+
+.was-validated .form-control:invalid + .input-group-append, .form-control.is-invalid + .input-group-append {
+    border-color: #dc3545;
+}
+
+.was-validated .form-control:valid + .input-group-append, .form-control.is-valid + .input-group-append {
+    border-color: #28a745;
+}
+
+.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+    box-shadow: none;
+}
+
+.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+    box-shadow: none;
 }

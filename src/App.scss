@@ -10,7 +10,7 @@ body {
 }
 
 .title {
-  width: fit-content;
+  margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -85,7 +85,6 @@ body {
     width: 166px;
     border: none;
     color: white;
-    margin: 35px auto;
     &:hover {
         background-color: #D71541;
     }

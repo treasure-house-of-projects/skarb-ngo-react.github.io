@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-function New() {
+function New({localization}) {
     const [news, setNews] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
 

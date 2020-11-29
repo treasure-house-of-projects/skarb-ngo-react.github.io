@@ -32,6 +32,10 @@
         display: flex;
         flex-direction: column;
 
+        &_button {
+            margin: 35px auto;
+        }
+
         &_tasks {
             font-style: normal;
             font-weight: bold;

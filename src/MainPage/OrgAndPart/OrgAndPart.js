@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './OrgAndPart.scss'
 
-function OrgAndPart() {
+function OrgAndPart({localization}) {
     const [orgLogo, setOrgLogo] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
     useEffect(() => {
@@ -16,13 +16,13 @@ function OrgAndPart() {
     }, [])
     return (
         <div className='organizations'>
-            <title className='title organizations__title title--red title--small'>Организации и партнеры</title>
+            <title className='title organizations__title title--red title--small'>{localization.label.organizationsAndPartners}</title>
             <div className='organization'>
                 { isLoaded ? orgLogo.map(org => 
                     <img className='organization__img' src={org.logo} alt='organization__icon' key={org.id}></img>
                 ) : <div>Loading...</div>}
             </div>
-            <button className='button organizations__button button--center'>Все участники</button>
+            <button className='button organizations__button button--center'>{localization.label.membersAll}</button>
         </div>
     )
 }
