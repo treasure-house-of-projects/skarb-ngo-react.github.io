@@ -40,64 +40,41 @@ function VolunteerRegistration({localization}) {
         setCurrentStep(currentStep + 1)
     }
 
+    function encrypt(word){
+        var key = CryptoJS.enc.Utf8.parse("KeyForPassword77");
+        var srcs = CryptoJS.enc.Utf8.parse(word);
+        var encrypted = CryptoJS.AES.encrypt(srcs, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+        return encrypted.toString();
+    }
+
+    function decrypt(word){
+        var key = CryptoJS.enc.Utf8.parse("KeyForPassword77");
+        var decrypt = CryptoJS.AES.decrypt(word, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+        return CryptoJS.enc.Utf8.stringify(decrypt).toString();
+    }
+
     const finishSubmit = event => {
         event.preventDefault()
-        setCurrentStep(currentStep + 1)
-        let passwordEnc = CryptoJS.AES.encrypt(password, 'KeyForPassword77').toString()
-        let passwordConfirmEnc = CryptoJS.AES.encrypt(passwordConfirm, 'KeyForPassword77').toString()
-        let passwordDec = CryptoJS.AES.decrypt(passwordEnc, 'KeyForPassword77');
-        let passwordConfirmDec = CryptoJS.AES.decrypt(passwordConfirmEnc, 'KeyForPassword77');
-        console.log(passwordConfirmEnc, passwordEnc)
-        console.log(passwordConfirmDec.toString(CryptoJS.enc.Utf8), passwordDec.toString(CryptoJS.enc.Utf8))
-
         axios.post(`http://back-dev.skarb.ngo/v1.0/users/register/volunteers`, {
             about: about,
             categoryIds: selectedCategorie,
-            confirmPassword: passwordConfirm,
+            confirmPassword: encrypt(passwordConfirm),
             email: email,
             firstName: fname,
             lastName: lname,
             locale: "EN",
-            password: password,
-            phone: phone,
+            password: encrypt(password),
+            phone: phone === "" ? null : phone,
             sex: sex
         })
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
+        .then((response) => {
+            setCurrentStep(currentStep + 1)
         })
         .catch(error => {
-            console.log(error.message);
-            console.log(error);
-        });
-
-        
-        // fetch('http://back-dev.skarb.ngo/v1.0/users/register/volunteers', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         // 'Access-Control-Allow-Origin': '*',
-        //         // 'Access-Control-Allow-Methods': 'POST,GET,PUT,DELETE',
-        //         // 'Access-Control-Allow-Headers': 'Authorization, Lang',
-        //     },
-        //     body: JSON.stringify({
-        //         about: about,
-        //         categoryIds: selectedCategorie,
-        //         confirmPassword: passwordConfirmEnc,
-        //         email: email,
-        //         firstName: fname,
-        //         lastName: lname,
-        //         locale: "EN",
-        //         password: passwordEnc,
-        //         phone: phone,
-        //         sex: sex,
-        //     })
-        // })
-        
-        // .then((response)=>response.json())
-
-
-    };
+            let errorMessageArr = error.response.data.fieldErrors.map((error) => error.codes[error.codes.length-1])
+            errorMessageArr.map(error => alert(eval(`localization.validationMessages.${error}`)))
+        })
+    }
 
     function backwards() {
         setCurrentStep(currentStep - 1)
@@ -125,7 +102,7 @@ function VolunteerRegistration({localization}) {
                 </title>
             </div>
             <div className="row justify-content-md-center">
-                <p className='login_page__info col-10'>
+                <p className='login_page__info col-lg-10'>
                     {currentStep === 1 ? localization.registration.panel.header.sec : 
                     currentStep === 2 ? localization.startToWriteLater : localization.registration.successTwo}
                 </p>
@@ -169,20 +146,6 @@ function VolunteerRegistration({localization}) {
                 setReactSelectedCategories={setReactSelectedCategories}
                 about={about}
                 setAbout={setAbout}
-                // email={email}
-                // setEmail={setEmail}
-                // phone={phone}
-                // setPhone={setPhone}
-                // fname={fname}
-                // setFname={setFname}
-                // lname={lname}
-                // setLname={setLname}
-                // sex={sex}
-                // setSex={setSex}
-                // password={password}
-                // setPassword={setPassword}
-                // passwordConfirm={passwordConfirm}
-                // setPasswordConfirm={setPasswordConfirm}
 
                 backwards={backwards}
                 validation={validation}
@@ -435,9 +398,9 @@ function StepTwo({
         return null
     } 
     return(
-        <form className="container needs-validation" noValidate onClick={() => validation()} onSubmit={finishSubmit}>
+        <form className="container" noValidate onClick={() => validation()} onSubmit={finishSubmit}>
             <div className="row justify-content-center">
-                    <label htmlFor="exampleInputEmail1" className="form-control__label col-md-8">Задачи из каких областей вам интересны:</label>
+                    <label htmlFor="exampleInputEmail1" className="form-control__label col-md-8">{localization.story.volunteer.interestedTasks}:</label>
             </div>
             <div className="row justify-content-center">
                 <div className="form-row col-md-8">
@@ -474,7 +437,7 @@ function StepTwo({
             </div>
             <div className="row justify-content-center">
                 <div className="form-group col-md-8">
-                    <label htmlFor="validationTextarea" className="form-control__label">Расскажите о себе:</label>
+                    <label htmlFor="validationTextarea" className="form-control__label">{localization.story.volunteer.aboutYou}:</label>
                     <textarea 
                         class="form-control" 
                         id="validationTextarea" 
@@ -482,7 +445,7 @@ function StepTwo({
                         value={about}
                         onChange={(e) => setAbout(e.target.value)}
                     ></textarea>
-                    <small id="emailHelp" className="form-text text-muted">Расскажите о своем опыте и интересах</small>
+                    <small id="emailHelp" className="form-text text-muted">{localization.story.volunteer.aboutYouDescription}</small>
                 </div>
             </div>
             <div className="row justify-content-center">

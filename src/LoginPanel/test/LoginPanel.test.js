@@ -1,9 +1,10 @@
 import React from 'react'
+import { BrowserRouter as Router } from "react-router-dom"
 import { render, unmountComponentAtNode } from "react-dom"
 import { act } from "react-dom/test-utils"
-import lang from '../../../language'
+import lang from '../../language'
 
-import TasksContainer from './../TasksContainer'
+import LoginPanel from './../LoginPanel'
 
 let container = null
 beforeEach(() => {
@@ -19,6 +20,6 @@ afterEach(() => {
 
 it('renders without crashing', ()=>{
     act(() => {
-        render(<TasksContainer localization={lang.EN}/>, container)
+        render(<Router><LoginPanel localization={lang.EN}/></Router>, container)
     })
 })

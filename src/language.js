@@ -157,7 +157,9 @@ const langENOne = {
       }
     },
     organizations: 'Organizations',
+    organizationData: 'Entering organization data',
     organizationsAndPartners: 'Organizations and Partners',
+    organizationDoc: 'Uploading documents',
     partners: 'Partners',
     password: 'Password',
     performers: 'Performers',
@@ -168,6 +170,7 @@ const langENOne = {
     published: {
       tasks: 'Published tasks'
     },
+    accCreation: 'Creation of a personal account',
     registration: 'Registration',
     registrationAs: "You're registering as",
     remove: {
@@ -500,7 +503,10 @@ const langENThree = {
       description: 'Task description'
     },
     volunteer: {
-      about: 'About volunteer'
+      about: 'About volunteer',
+      interestedTasks: 'Tasks from which areas are you interested in',
+      aboutYou: 'Tell about yourself',
+      aboutYouDescription: 'Tell about your experience and interests'
     }
   },
   task: {
@@ -602,11 +608,19 @@ const langENThree = {
     Email: 'Email is incorrect',
     Future: 'Must be a future date',
     MaxFileSize: 'Max file size should be no greater than {1} megabyte(s)',
+    MaxDocSize: 'Max file size should be no greater than 3 megabyte(s)',
     NotBlank: 'Field cannot be blank',
     NotEmpty: 'Field can\'t be empty',
     NotEmptyFile: 'File should not be empty',
     NotNull: 'Field can\'t be empty',
     OrganizationName: 'Must not contain special characters',
+    OrganizationNameValid: 'Must match the name of the organization in the registration',
+    OrganizationPositionValid: 'Will display in the organization profile and tasks',
+    OrganizationLinkValid: 'Will be displayed in the organization`s profile on the site',
+    OrganizationAboutValid: 'Tell what the organization does',
+    OrganizationRLinkValid: 'Must match the name of the organization in the registration',
+    OrganizationInfo: 'Registration data is required to confirm the organization and the ability to participate in partnership tasks.',
+    OrganizationInfoTwo: 'You can skip this step now and return to it later in your account.',
     Password: 'Password must contain minimum eight characters, at least one letter and one number',
     PasswordsMatch: 'Password and confirm password isn\'t equal',
     PersonName: {
@@ -617,8 +631,8 @@ const langENThree = {
     PositionName: 'Must not contain special characters',
     SiteUrl: 'Should be valid URL address',
     Size: {
-      categoryIds: 'Should be selected from {2} to {1} categories',
-      documents: 'No more than 3 files',
+      categoryIds: 'Should be selected from 1 to 7 categories',
+      documents: 'No more than 3 files, 3mb each',
       java: {
         lang: {
           String: 'Should be no more than {1} characters'
@@ -797,7 +811,9 @@ const langRUOne = {
       }
     },
     organizations: 'Организации',
+    organizationData: 'Ввод данных об организации',
     organizationsAndPartners: 'Организации и Партнеры',
+    organizationDoc: 'Загрузка документов',
     partners: 'Партнеры',
     password: 'Пароль',
     performers: 'Исполнители',
@@ -808,6 +824,7 @@ const langRUOne = {
     published: {
       tasks: 'Опубликованные задачи'
     },
+    accCreation: 'Создание личного кабинета',
     registration: 'Регистрация',
     registrationAs: "Вы регистрируетесь как",
     remove: {
@@ -1138,7 +1155,10 @@ const langRUThree = {
       description: 'Описание задачи'
     },
     volunteer: {
-      about: 'О волонтере'
+      about: 'О волонтере',
+      interestedTasks: 'Задачи из каких областей вам интересны',
+      aboutYou: 'Расскажите о себе',
+      aboutYouDescription: 'Расскажите о своем опыте и интересах'
     }
   },
   task: {
@@ -1240,11 +1260,19 @@ const langRUThree = {
     Email: 'Email введено не коректно',
     Future: 'Дата должна быть в будущем',
     MaxFileSize: 'Максимальный размер файла логотипа должен бить не больше {1} мегабайт',
+    MaxDocSize: 'Максимальный размер файла должен бить не больше 3 мегабайт',
     NotBlank: 'Поле не может быть пустым',
     NotEmpty: 'Поле не может быть пустым',
     NotEmptyFile: 'Файл не должен быть пустым',
     NotNull: 'Поле не может быть пустым',
     OrganizationName: 'Не должно содержать символов',
+    OrganizationNameValid: 'Должно совпадать с названием организации в регистрации',
+    OrganizationPositionValid: 'Будет отображаться в профиле организации и задачах',
+    OrganizationLinkValid: 'Будет отображаться в профиле организации на сайте',
+    OrganizationAboutValid: 'Расскажите, чем занимается организация',
+    OrganizationRLinkValid: 'Должно совпадать с названием организации в регистрации',
+    OrganizationInfo: 'Регистрационные данные необходимы для подтверждения организации и возможности участия в партнерских задачах.',
+    OrganizationInfoTwo: 'Вы можете пропустить этот шаг сейчас и вернуться к нему позднее в личном кабинете.',
     Password: 'Пароль должен содержать минимум восемь символов, минимум одну букву и одну цифру',
     PasswordsMatch: 'Пароль и подтверждение не совпадают',
     PersonName: {
@@ -1255,8 +1283,8 @@ const langRUThree = {
     PositionName: 'Не должно содержать символов',
     SiteUrl: 'Должен быть вылидный URL адрес',
     Size: {
-      categoryIds: 'Должно быть выбрано от {2} до {1} категорий',
-      documents: 'Не больше трех файлов',
+      categoryIds: 'Должно быть выбрано от 1 до 7 категорий',
+      documents: 'Не больше трех файлов по 3МБ каждый',
       java: {
         lang: {
           String: 'Должно быть не больше {1} символов'
@@ -1434,7 +1462,9 @@ const langUAOne = {
       }
     },
     organizations: 'Організації',
+    organizationData: 'Введення даних про організацію',
     organizationsAndPartners: 'Організації і Партнери',
+    organizationDoc: 'Завантаження документів',
     partners: 'Партнери',
     password: 'Пароль',
     performers: 'Виконавці',
@@ -1445,6 +1475,7 @@ const langUAOne = {
     published: {
       tasks: 'Опубліковані завдання'
     },
+    accCreation: 'Створення особистого кабінету',
     registration: 'Реєстрація',
     registrationAs: "Ви реєструєтеся як",
     remove: {
@@ -1777,7 +1808,10 @@ const langUAThree = {
       description: 'Опис завдання'
     },
     volunteer: {
-      about: 'Про волонтера'
+      about: 'Про волонтера',
+      interestedTasks: 'Завдання з яких областей вам цікаві',
+      aboutYou: 'Розкажіть про себе',
+      aboutYouDescription: 'Розкажіть про свій досвід і інтереси'
     }
   },
   task: {
@@ -1879,11 +1913,19 @@ const langUAThree = {
     Email: 'Email введено не коректно',
     Future: 'Дата повинна бути в майбутньому',
     MaxFileSize: 'Максимальний розмір файлу не повинен перевищувати {1} мегабайт',
+    MaxDocSize: 'Максимальний розмір файлу не повинен перевищувати 3 мегабайт',
     NotBlank: 'Поле не може бути пустим',
     NotEmpty: 'Поле не може бути порожнім',
     NotEmptyFile: 'Файл не повинен бути пустим',
     NotNull: 'Поле не може бути порожнім',
     OrganizationName: 'Не должно содержать символов',
+    OrganizationNameValid: 'Повинно співпадати з назвою організації в реєстрації',
+    OrganizationPositionValid: 'Відображатиметься в профілі організації та завдання',
+    OrganizationLinkValid: 'Відображатиметься в профілі організації на сайті',
+    OrganizationAboutValid: 'Розкажіть, чим займається організація',
+    OrganizationRLinkValid: 'Повинно співпадати з назвою організації в реєстрації',
+    OrganizationInfo: 'Реєстраційні дані необхідні для підтвердження організації та можливості участі в партнерських завданнях.',
+    OrganizationInfoTwo: 'Ви можете пропустити цей крок зараз і повернутися до нього пізніше в особистому кабінеті.',
     Password: 'Пароль повинен містити мінімум вісім символів, принаймні одну букву та одну цифру',
     PasswordsMatch: 'Пароль та підтвердження не співпадають',
     PersonName: {
@@ -1894,8 +1936,8 @@ const langUAThree = {
     PositionName: 'Не должно содержать символов',
     SiteUrl: 'Повинна бути валідна URL адреса',
     Size: {
-      categoryIds: 'Повинно бути вибрано від {2} до {1} категорій',
-      documents: 'Не більше трьох файлів',
+      categoryIds: 'Повинно бути вибрано від 1 до 7 категорій',
+      documents: 'Не більше трьох файлів по 3МБ кожний',
       java: {
         lang: {
           String: 'Повинно бути не більше {1} символів'

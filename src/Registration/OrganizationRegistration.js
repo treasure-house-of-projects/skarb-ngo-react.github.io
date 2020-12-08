@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './Registration.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash, faTimes } from '@fortawesome/free-solid-svg-icons'
+import Select from 'react-select'
 import * as CryptoJS from 'crypto-js'
+import axios from 'axios'
 
 function OrganizationRegistration({localization}) {
     const [email, setEmail] = useState("");
@@ -15,6 +17,9 @@ function OrganizationRegistration({localization}) {
     const [organizationName, setOrganizationName] = useState("");
     const [organizationPosition, setOrganizationPosition] = useState("");
     const [organizationLink, setOrganizationLink] = useState("");
+    const [categorie, setCategorie] = useState([]);
+    const [selectedCategorie, setSelectedCategorie] = useState([]);
+    const [reactSelectedCategories, setReactSelectedCategories] = useState([]);
     const [organizationAbout, setOrganizationAbout] = useState("");
     const [organizationRegLink, setOrganizationRegLink] = useState("");
     const [file, setFile] = useState([]);
@@ -22,10 +27,36 @@ function OrganizationRegistration({localization}) {
     const [isVisibleOne, setIsVisibleOne] = useState(false);
     const [isVisibleTwo, setIsVisibleTwo] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
+
+    useEffect(() => {
+        fetch('http://back-dev.skarb.ngo/v1.0/categories/partner')
+            .then(res => res.json())
+            .then(
+                (res) => { 
+                    let loadedCategories = []
+                    res.map(cat => loadedCategories.push({value: cat.id, label: cat.name}))
+                    setCategorie(loadedCategories)
+                    console.log(categorie)
+                    console.log(loadedCategories)
+                })
+    }, []);
     
     const handleSubmit = event => {
         event.preventDefault()
         setCurrentStep(currentStep + 1)
+    }
+
+    function encrypt(word){
+        var key = CryptoJS.enc.Utf8.parse("KeyForPassword77");
+        var srcs = CryptoJS.enc.Utf8.parse(word);
+        var encrypted = CryptoJS.AES.encrypt(srcs, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+        return encrypted.toString();
+    }
+
+    function decrypt(word){
+        var key = CryptoJS.enc.Utf8.parse("KeyForPassword77");
+        var decrypt = CryptoJS.AES.decrypt(word, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+        return CryptoJS.enc.Utf8.stringify(decrypt).toString();
     }
 
     const finishSubmit = event => {
@@ -37,7 +68,40 @@ function OrganizationRegistration({localization}) {
         if (file.length > 3) {
         } else if (tooBigFiles.length > 0) {
         } else {
-            setCurrentStep(currentStep + 1)
+            let bodyFormData = new FormData();
+            organizationAbout === '' || organizationAbout === undefined ? console.log() : bodyFormData.append('aboutOrganization', organizationAbout);
+            bodyFormData.append('categoryIds', selectedCategorie);
+            let encryptedPassConfirm = encrypt(passwordConfirm);
+            bodyFormData.append('confirmPassword', encryptedPassConfirm);
+            file[0] === undefined ? console.log() : bodyFormData.append('documents', file[0]);
+            file[1] === undefined ? console.log() : bodyFormData.append('documents', file[1]);
+            file[2] === undefined ? console.log() : bodyFormData.append('documents', file[2]);
+            bodyFormData.append('email', email);
+            bodyFormData.append('firstName', fname);
+            bodyFormData.append('lastName', lname);
+            bodyFormData.append('locale', "EN");
+            bodyFormData.append('organizationName', organizationName);
+            organizationRegLink === '' || organizationRegLink === undefined ? console.log() : bodyFormData.append('organizationRegistrationUrl', organizationRegLink);
+            organizationLink === '' || organizationLink === undefined ? console.log() : bodyFormData.append('organizationSiteUrl', organizationLink);
+            let encryptedPass = encrypt(password);
+            bodyFormData.append('password', encryptedPass);
+            phone === '' || phone === undefined ? console.log() : bodyFormData.append('phone', phone)
+            bodyFormData.append('positionInOrganization', organizationPosition);
+            bodyFormData.append('sex', sex);
+
+            axios({
+                method: 'post',
+                url: 'http://back-dev.skarb.ngo/v1.0/users/register/organizations',
+                data: bodyFormData,
+                headers: {'Content-Type': 'multipart/form-data' }
+                })
+                .then((response) => {
+                    setCurrentStep(currentStep + 1)
+                })
+                .catch(error => {
+                    let errorMessageArr = error.response.data.fieldErrors.map((error) => error.codes[error.codes.length-1])
+                    errorMessageArr.map(error => alert(eval(`localization.validationMessages.${error}`)))
+                });
         }
     }
 
@@ -57,20 +121,6 @@ function OrganizationRegistration({localization}) {
             })
         })
     }
-
-    // function encrypt(message = '', key = 'KeyForPassword77'){
-    //     var message = CryptoJS.AES.encrypt(message, key);
-    //     console.log(message.toString())
-    // }
-    
-    // function decrypt(message = '', key = ''){
-    //     var code = CryptoJS.AES.decrypt(message, key);
-    //     var decryptedMessage = code.toString(CryptoJS.enc.Utf8);
-    
-    //     return decryptedMessage;
-    // }
-    // console.log(encrypt('Hello World'));
-    // console.log(decrypt('U2FsdGVkX1/0oPpnJ5S5XTELUonupdtYCdO91v+/SMs='))
 
     return (
         <div className='registration container'>
@@ -97,10 +147,10 @@ function OrganizationRegistration({localization}) {
                             color: "#444156"}
                         }  
                     >
-                        Создание личного кабинета
+                        {localization.label.accCreation}
                     </p>
                 </div>
-                <div class="col-md-auto registration-stage--inline">
+                <div className="col-md-auto registration-stage--inline">
                     <div className="circle" 
                         style={
                             currentStep === 2 ?
@@ -122,10 +172,10 @@ function OrganizationRegistration({localization}) {
                             color: "#444156"}
                         }  
                     >
-                        Ввод данных об организации
+                        {localization.label.organizationData}
                     </p>
                 </div>
-                <div class="col-md-auto registration-stage--inline">
+                <div className="col-md-auto registration-stage--inline">
                     <div className="circle" 
                         style={
                             currentStep === 3 ?
@@ -147,7 +197,7 @@ function OrganizationRegistration({localization}) {
                             color: "#444156"}
                         }  
                     >
-                        Загрузка документов
+                        {localization.label.organizationDoc}
                     </p>
                 </div>
             </div>
@@ -200,6 +250,12 @@ function OrganizationRegistration({localization}) {
                 setOrganizationPosition={setOrganizationPosition}
                 organizationLink={organizationLink}
                 setOrganizationLink={setOrganizationLink}
+                categorie={categorie}
+                setCategorie={setCategorie}
+                selectedCategorie={selectedCategorie}
+                setSelectedCategorie={setSelectedCategorie}
+                reactSelectedCategories={reactSelectedCategories}
+                setReactSelectedCategories={setReactSelectedCategories}
                 organizationAbout={organizationAbout}
                 setOrganizationAbout={setOrganizationAbout}
 
@@ -341,8 +397,8 @@ function StepOne({
                                 <input 
                                     type="radio" 
                                     name="size" 
-                                    onChange={() => setSex("male")}
-                                    checked={sex === "male" ? true : false}
+                                    onChange={() => setSex("MALE")}
+                                    checked={sex === "MALE" ? true : false}
                                     required
                                 />
                                 <span>{localization.sex.mname}</span>
@@ -356,8 +412,8 @@ function StepOne({
                                 <input 
                                     type="radio" 
                                     name="size" 
-                                    onChange={() => setSex("female")}
-                                    checked={sex === "female" ? true : false}
+                                    onChange={() => setSex("FEMALE")}
+                                    checked={sex === "FEMALE" ? true : false}
                                     required
                                 />
                                 <span>{localization.sex.fname}</span>
@@ -439,6 +495,12 @@ function StepTwo({
     setOrganizationPosition,
     organizationLink,
     setOrganizationLink,
+    categorie,
+    setCategorie,
+    selectedCategorie,
+    setSelectedCategorie,
+    reactSelectedCategories,
+    setReactSelectedCategories,
     organizationAbout,
     setOrganizationAbout,
 
@@ -468,7 +530,7 @@ function StepTwo({
                     <div className="invalid-feedback">
                     {organizationName === '' ? localization.validationMessages.NotEmpty : `${localization.organization.name} ${localization.last.error}` } 
                     </div>
-                    <small id="emailHelp" className="form-text text-muted">Должно совпадать с названием организации в регистрации</small>
+                    <small id="emailHelp" className="form-text text-muted">{localization.validationMessages.OrganizationNameValid}</small>
                 </div>
             </div>
             <div className="row justify-content-center">
@@ -487,7 +549,7 @@ function StepTwo({
                     <div className="invalid-feedback">
                     {organizationPosition === '' ? localization.validationMessages.NotEmpty : `${localization.organization.name} ${localization.last.error}` }
                     </div>
-                    <small id="emailHelp" className="form-text text-muted">Будет отображаться в профиле организации и задачах</small>
+                    <small id="emailHelp" className="form-text text-muted">{localization.validationMessages.OrganizationPositionValid}</small>
                 </div>
             </div>
             <div className="row justify-content-center">
@@ -506,20 +568,67 @@ function StepTwo({
                     <div className="invalid-feedback">
                         {localization.validationMessages.SiteUrl}
                     </div>
-                    <small id="emailHelp" className="form-text text-muted">Будет отображаться в профиле организации на сайте</small>
+                    <small id="emailHelp" className="form-text text-muted">{localization.validationMessages.OrganizationLinkValid}</small>
                 </div>
             </div>
+            <div className="row justify-content-center">
+                    <label htmlFor="exampleInputEmail1" className="form-control__label col-md-8">{localization.organization.categories}:</label>
+            </div>
+            <div className="row justify-content-center">
+                <div className="form-row col-md-8">
+                    <Select
+                        isMulti
+                        defaultValue={reactSelectedCategories}
+                        name="sectedCategories"
+                        options={selectedCategorie.length < 8 || selectedCategorie === null ? categorie :
+                            [
+                                {
+                                    label: 'Reached max items',
+                                    value: undefined,
+                                    isDisabled: true,
+                                },
+                            ]}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        closeMenuOnSelect={false}
+                        maxMenuHeight="400px"
+                        onChange={(v) => {
+                            if (v === null) {
+                                setSelectedCategorie([])
+                                setReactSelectedCategories([])
+                            } else {
+                                setReactSelectedCategories(v)
+                                let idCat = []
+                                v.map(cat => idCat.push(cat.value))
+                                console.log(v)
+                                setSelectedCategorie(idCat)
+                            }
+                        }}
+                    ></Select>
+                    <input
+                        tabIndex={-1}
+                        autoComplete="off"
+                        style={{ opacity: 0, height: 0 }}
+                        value={selectedCategorie}
+                        required
+                    />
+                    <div className="invalid-feedback" style={{marginTop: "-15px"}}>
+                        {localization.validationMessages.Size.categoryIds}
+                    </div>
+                </div>  
+            </div>
+
             <div className="row justify-content-center">
                 <div className="form-group col-md-8">
                     <label htmlFor="validationTextarea" className="form-control__label">{localization.about.organization}:</label>
                     <textarea 
-                        class="form-control" 
+                        className="form-control" 
                         id="validationTextareaOrgAbout" 
                         maxLength={600} 
                         value={organizationAbout}
                         onChange={(e) => setOrganizationAbout(e.target.value)}
                     ></textarea>
-                    <small id="emailHelp" className="form-text text-muted">Расскажите, чем занимается организация</small>
+                    <small id="emailHelp" className="form-text text-muted">{localization.validationMessages.OrganizationAboutValid}</small>
                 </div>
             </div>         
             <div className="row justify-content-center">
@@ -584,19 +693,20 @@ function StepThree({
                     <div className="invalid-feedback">
                         {localization.validationMessages.SiteUrl} 
                     </div>
-                    <small id="emailHelp" className="form-text text-muted">Должно совпадать с названием организации в регистрации</small>
+                    <small id="emailHelp" className="form-text text-muted">{localization.validationMessages.OrganizationRLinkValid}</small>
                 </div>
             </div>
             <p className='login_page__info'>{localization.organization.registration.panel.header.docs}</p> 
             <div className="row justify-content-center">
                 <div className="form-group col-md-auto">
-                    <div class="custom-file">
+                    <div className="custom-file">
                         <input 
                             type="file" 
                             className={invalidFile === true ? "is-invalid" : ""}
                             style={{display:"none"}}
                             id="files"
                             onChange={(e) => setFile(Object.values(e.target.files))}
+                            accept="image/png, image/jpeg, application/pdf" 
                             multiple
                         />
                         <label className="input-file-button button" for="files">{localization.button.attach.file}</label>
@@ -629,7 +739,7 @@ function StepThree({
                             <span className="input-group-text" onClick={() => handleRemove(0)}><FontAwesomeIcon className="fa-eye" icon={faTimes} /></span>
                         </div> 
                         <div className="invalid-feedback">
-                            Файл превышает допустимый размер
+                            {localization.validationMessages.MaxDocSize}
                         </div>
                     </div>  
                 </div>
@@ -650,7 +760,7 @@ function StepThree({
                             <span className="input-group-text" onClick={() => handleRemove(1)}><FontAwesomeIcon className="fa-eye" icon={faTimes} /></span>
                         </div>
                         <div className="invalid-feedback">
-                            Файл превышает допустимый размер
+                            {localization.validationMessages.MaxDocSize}
                         </div>
                     </div>  
                 </div>
@@ -671,7 +781,7 @@ function StepThree({
                             <span className="input-group-text" onClick={() => handleRemove(2)}><FontAwesomeIcon className="fa-eye" icon={faTimes} /></span>
                         </div>
                         <div className="invalid-feedback">
-                            Файл превышает допустимый размер
+                            {localization.validationMessages.MaxDocSize}
                         </div>
                     </div>  
                 </div>
@@ -682,8 +792,8 @@ function StepThree({
             </div>
             <div className="row justify-content-center">
                 <div className="form-group col-md-auto col-md-6">
-                    <small className="form-text text-muted" style={{marginBottom: 20 + "px"}}>Регистрационные данные необходимы для подтверждения организации и возможности участия в партнерских задачах.</small>
-                    <small className="form-text text-muted" style={{marginBottom: 20 + "px"}}>Вы можете пропустить этот шаг сейчас и вернуться к нему позднее в личном кабинете.</small>
+                    <small className="form-text text-muted" style={{marginBottom: 20 + "px"}}>{localization.validationMessages.OrganizationInfo}</small>
+                    <small className="form-text text-muted" style={{marginBottom: 20 + "px"}}>{localization.validationMessages.OrganizationInfoTwo}</small>
                 </div>
             </div>
         </form>                

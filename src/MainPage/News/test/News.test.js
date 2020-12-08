@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, unmountComponentAtNode } from "react-dom"
 import { act } from "react-dom/test-utils"
+import lang from '../../../language'
 
 import NewsContainer from './../NewsContainer'
 
@@ -18,7 +19,7 @@ afterEach(() => {
 
 it('renders without crashing', ()=>{
     act(() => {
-        render(<NewsContainer />, container)
+        render(<NewsContainer localization={lang.EN}/>, container)
     })
 })
 

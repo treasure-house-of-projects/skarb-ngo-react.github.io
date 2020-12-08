@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, unmountComponentAtNode } from "react-dom"
 import { act } from "react-dom/test-utils"
+import lang from '../../../language'
 
 import Participant from './../Participant'
 
@@ -18,7 +19,7 @@ afterEach(() => {
 
 it('renders without crashing', ()=>{
     act(() => {
-        render(<Participant />, container)
+        render(<Participant localization={lang.EN}/>, container)
     })
 })
 
@@ -47,7 +48,7 @@ it("renders user", async () => {
     })
   )
   await act(async () => {
-    render(<Participant id="123" />, container)
+    render(<Participant id="123" localization={lang.EN}/>, container)
   })
   expect(container.querySelector(".participant__name").textContent).toBe(fakeUser[0].name)
   expect(container.querySelector(".participant__job").textContent).toBe("дизайн, верстка сайтов, ")

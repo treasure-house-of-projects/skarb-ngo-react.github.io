@@ -1,9 +1,9 @@
 import React from 'react'
 import { render, unmountComponentAtNode } from "react-dom"
 import { act } from "react-dom/test-utils"
-import lang from '../../../language'
+import lang from '../../language'
 
-import TasksContainer from './../TasksContainer'
+import OrganizationRegistration from './../OrganizationRegistration'
 
 let container = null
 beforeEach(() => {
@@ -19,6 +19,6 @@ afterEach(() => {
 
 it('renders without crashing', ()=>{
     act(() => {
-        render(<TasksContainer localization={lang.EN}/>, container)
+        render(<OrganizationRegistration localization={lang.EN}/>, container)
     })
 })

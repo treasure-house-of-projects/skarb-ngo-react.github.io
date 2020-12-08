@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, unmountComponentAtNode } from "react-dom"
 import { act } from "react-dom/test-utils"
-
+import lang from './../../language'
 import Footer from './../Footer'
 
 let container = null
@@ -18,6 +18,6 @@ afterEach(() => {
 
 it('renders without crashing', ()=>{
     act(() => {
-        render(<Footer />, container)
+        render(<Footer localization={lang.EN}/>, container)
     })
 })

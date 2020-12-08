@@ -5,8 +5,8 @@ function MainPageContent({localization}) {
     const [statistic, setStatistic] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
     useEffect(() => {
-        // fetch('http://back-dev.skarb.ngo/v1.0/tasks/search/recent?numberOfTasks=6')
-        fetch('http://localhost:3001/statistic')
+        fetch('http://back-dev.skarb.ngo/v1.0/tasks/statistic')
+        // fetch('http://localhost:3001/statistic')
             .then(res => res.json())
             .then(
                 (res) => {
@@ -23,11 +23,11 @@ function MainPageContent({localization}) {
             {isLoaded ? 
             <div className='statistic'>
                 <title className='title statistic_title title--orange'>{localization.label.statistic}</title>
-                <p className="statistic_tasks task-overall">{statistic.taskOverall}</p>
+                <p className="statistic_tasks task-overall">{statistic.published}</p>
                 <p className="statistic_tasks_desc">{localization.label.published.tasks}</p>
-                <p className="statistic_tasks task-in-progress">{statistic.taskInProgress}</p>
+                <p className="statistic_tasks task-in-progress">{statistic.inProgress}</p>
                 <p className="statistic_tasks_desc">{localization.label.inprogress.tasks}</p>
-                <p className="statistic_tasks task-completed">{statistic.taskCompleted}</p>
+                <p className="statistic_tasks task-completed">{statistic.completed}</p>
                 <p className="statistic_tasks_desc">{localization.label.completed.tasks}</p>
                 <button className='button statistic_button button--orange'>{localization.label.tasksAll}</button>
             </div>

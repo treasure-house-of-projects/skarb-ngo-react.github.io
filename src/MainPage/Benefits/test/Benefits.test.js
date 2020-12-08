@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, unmountComponentAtNode } from "react-dom"
 import { act } from "react-dom/test-utils"
+import lang from '../../../language'
 
 import Benefits from './../Benefits'
 
@@ -18,6 +19,6 @@ afterEach(() => {
 
 it('renders without crashing', ()=>{
     act(() => {
-        render(<Benefits />, container)
+        render(<Benefits localization={lang.EN}/>, container)
     })
 })

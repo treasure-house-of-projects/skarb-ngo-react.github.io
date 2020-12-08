@@ -10,8 +10,8 @@ function Tasks({localization}) {
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-        // fetch('http://back-dev.skarb.ngo/v1.0/tasks/search/recent?numberOfTasks=6')
-        fetch('http://localhost:3001/tasks')
+        fetch('http://back-dev.skarb.ngo/v1.0/tasks/search/recent?numberOfTasks=6')
+        // fetch('http://localhost:3001/tasks')
             .then(res => res.json())
             .then(
                 (res) => { 

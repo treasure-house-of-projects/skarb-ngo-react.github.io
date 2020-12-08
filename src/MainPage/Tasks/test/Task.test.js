@@ -2,6 +2,7 @@ import React from 'react'
 import { render, unmountComponentAtNode } from "react-dom"
 import { act } from "react-dom/test-utils"
 import Tasks from './../Task'
+import lang from '../../../language'
 
 import Task from './../Task'
 
@@ -19,7 +20,7 @@ afterEach(() => {
 
 it('renders without crashing', ()=>{
     act(() => {
-        render(<Task />, container)
+        render(<Task localization={lang.EN}/>, container)
     })
 })
 
@@ -64,8 +65,8 @@ it("renders task", async () => {
     })
   )
   await act(async () => {
-    render(<Tasks id="123" />, container)
+    render(<Tasks id="123" localization={lang.EN}/>, container)
   })
-  expect(container.getElementsByClassName("task__description")[0].textContent).toBe(`Дедлайн - ${fakeTask[0].deadline}`)
+  expect(container.getElementsByClassName("task__description")[0].textContent).toBe(`Actual until - ${fakeTask[0].deadline}`)
   global.fetch.mockRestore()
 })

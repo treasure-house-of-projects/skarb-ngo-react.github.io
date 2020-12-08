@@ -2,6 +2,7 @@ import React from 'react'
 import { render, unmountComponentAtNode } from "react-dom"
 import { BrowserRouter as Router } from "react-router-dom"
 import { act } from "react-dom/test-utils"
+import lang from './../../language'
 
 import LoginPage from './../LoginPage'
 
@@ -19,6 +20,6 @@ afterEach(() => {
 
 it('renders without crashing', ()=>{
     act(() => {
-        render(<Router><LoginPage /></Router>, container)
+        render(<Router><LoginPage localization={lang.EN}/></Router>, container)
     })
 })

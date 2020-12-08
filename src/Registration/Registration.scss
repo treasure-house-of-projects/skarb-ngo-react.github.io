@@ -6,6 +6,10 @@
     justify-content: center;
     flex-direction: column;
 
+    .needs-validation {
+      margin-bottom: 20px;
+    }
+
     .registration-stage {
       margin: 30px;
 
