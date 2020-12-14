@@ -5,7 +5,7 @@ import Participant from './Participant'
 function Participants({localization}) {
     return (
         <div className='second_backgr'>
-        <div className='participants backgr--two_tone'>
+        <div className='participants backgr--two_tone container'>
             <title className='title participants__title title--white'>{localization.label.members}</title>
             <title className='title participants__title-second title--white title--small'>{localization.label.volunteers}</title>
             <div className='participants__container'>

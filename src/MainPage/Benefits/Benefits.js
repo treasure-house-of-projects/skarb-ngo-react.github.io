@@ -7,7 +7,7 @@ import puzzle2 from './Rectangle (2).png'
 function Benefits({localization}) {
     return (
         <div className='second_backgr'>
-        <div className='benefits backgr--two_tone'>
+        <div className='benefits backgr--two_tone container'>
             <title className='title benefits__title title--white'>{localization.label.benefits}</title>
             <div className='benefits__content'>
                 <div className='benefits__benefit'>

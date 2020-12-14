@@ -15,7 +15,7 @@ function MainPageContent({localization}) {
                 })
     }, [])
     return (
-        <div className='content'>
+        <div className='content container'>
             <div className='info'>
                 <title className='title info_title title--red '>Длинный заголовок в 2 строчки</title>
                 <div className='info_text'>Praesent pellentesque molestie metus, vitae tincidunt lectus vulputate in. Aenean sed consequat leo. Quisque convallis commodo arcu, a faucibus lorem interdum non.</div>

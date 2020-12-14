@@ -4,7 +4,7 @@ import './News.scss'
 
 function NewsContainer({localization}) {
     return (
-        <div className='news'>
+        <div className='news container'>
             <title className='title news__title title--red'>{localization.label.news}</title>
             <div className='news__container'>
                 <New localization={localization}></New>

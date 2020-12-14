@@ -15,7 +15,7 @@ function OrgAndPart({localization}) {
                 })
     }, [])
     return (
-        <div className='organizations'>
+        <div className='organizations container'>
             <title className='title organizations__title title--red title--small'>{localization.label.organizationsAndPartners}</title>
             <div className='organization'>
                 { isLoaded ? orgLogo.map(org => 

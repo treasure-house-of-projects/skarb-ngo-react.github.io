@@ -7,10 +7,12 @@ import {
 import Header from './Header/Header'
 import MainPage from './MainPage/MainPage'
 import Footer from './Footer/Footer'
-import LoginPage from './LoginPage/LoginPage'
+import RegistrationPage from './RegistrationPage/RegistrationPage'
 import VolunteerRegistration from './Registration/VolunteerRegistration'
 import OrganizationRegistration from './Registration/OrganizationRegistration'
 import PartnerRegistration from './Registration/PartnerRegistration'
+import Confirm from './Registration/Confirm'
+import LoginPage from './LoginPage/LoginPage'
 import './App.scss'
 import './CustomBootstrap.scss'
 import lang from './language'
@@ -36,6 +38,9 @@ function App() {
     <Router>
       <Header language={language} onLanguageChange={setLanguage} localization={language}></Header>
         <Switch>
+          <Route path="/registration/confirm/:token">
+            <Confirm localization={language}></Confirm>
+          </Route>
           <Route path="/volunteer-registration">
             <VolunteerRegistration localization={language}></VolunteerRegistration>
           </Route>
@@ -44,6 +49,9 @@ function App() {
           </Route>
           <Route path="/partner-registration">
             <PartnerRegistration localization={language}></PartnerRegistration>
+          </Route>
+          <Route path="/registration-page">
+            <RegistrationPage localization={language}></RegistrationPage>
           </Route>
           <Route path="/login-page">
             <LoginPage localization={language}></LoginPage>

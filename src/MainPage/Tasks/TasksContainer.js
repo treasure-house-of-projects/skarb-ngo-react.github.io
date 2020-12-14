@@ -4,7 +4,7 @@ import './TasksContainer.scss'
 
 function TasksContainer({localization}) {
     return (
-        <div className='tasks'>
+        <div className='tasks container'>
             <title className='title tasks__title title--red'>{localization.label.tasks}</title>
             <div className='tasks__container'>
                 <Tasks localization={localization}></Tasks>

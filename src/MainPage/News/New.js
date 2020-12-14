@@ -5,7 +5,7 @@ function New({localization}) {
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-        // fetch('http://back-dev.skarb.ngo/v1.0/tasks/search/recent?numberOfTasks=6')
+        // fetch('http://back-dev.skarb.ngo/v1.0/news/search/latest?requiredAmount=3')
         fetch('http://localhost:3001/news')
             .then(res => res.json())
             .then(

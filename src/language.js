@@ -29,7 +29,7 @@ const langENOne = {
     create: {
       story: 'Create success story'
     },
-    'delete': 'Delete',
+    delete: 'Delete',
     login: 'LogIn',
     next: 'Next',
     organization: 'Organization',
@@ -37,7 +37,9 @@ const langENOne = {
     register: 'Sign up',
     save: 'Save changed',
     upload: 'Upload',
-    volunteer: 'Volunteer'
+    volunteer: 'Volunteer',
+    toAcc: 'To personal account',
+    toTask: 'Go to task search'
   },
   categories: {
     organization: 'Organization task categories'
@@ -68,7 +70,8 @@ const langENOne = {
   email: {
     name: 'Email',
     info: 'We will send confirmations and notifications by mail.',
-    error: 'Must contain "@". Example mail@mail.com'
+    error: 'Must contain "@". Example mail@mail.com',
+    login: 'Enter the email you provided during registration'
   },
   first: {
     name: 'First name'
@@ -126,6 +129,7 @@ const langENOne = {
     },
     enter: 'Enter',
     forgotPassword: 'Forgot Password?',
+    loginTitle: 'Login to your personal account',
     help: 'Help',
     inprogress: {
       tasks: 'In progress tasks'
@@ -409,6 +413,7 @@ const langENTwo = {
   registration: {
     confirmed: 'Your email confirmed!',
     notconfirmed: 'Your email did not confirmed!',
+    info: 'You can now view and respond to organizational tasks.',
     panel: {
       header: {
         sec: 'Enter data:',
@@ -691,7 +696,9 @@ const langRUOne = {
     register: 'Зарегистрироваться',
     save: 'Сохранить изменения',
     upload: 'Загрузить',
-    volunteer: 'Волонтер'
+    volunteer: 'Волонтер',
+    toAcc: 'В личный кабинет',
+    toTask: 'К поиску задач'
   },
   categories: {
     organization: 'Категории задач организации'
@@ -722,7 +729,8 @@ const langRUOne = {
   email: {
     name: 'Email',
     info: 'Мы будем отправлять подтверждения и уведомления на почту.',
-    error: 'Должен содержать “@”. Пример mail@mail.com'
+    error: 'Должен содержать “@”. Пример mail@mail.com',
+    login: 'Введите email, указанный при регистрации'
   },
   first: {
     name: 'Имя'
@@ -780,6 +788,7 @@ const langRUOne = {
     },
     enter: 'Войти',
     forgotPassword: 'Забыли пароль?',
+    loginTitle: 'Вход в личный кабинет',
     help: 'Помощь',
     inprogress: {
       tasks: 'Задачи в работе'
@@ -1062,6 +1071,7 @@ const langRUTwo = {
   registration: {
     confirmed: 'Ваш email подтверждено!',
     notconfirmed: 'Ваш email не подтверждено!',
+    info: 'Теперь вы можете просматривать и откликаться на задачи организаций.',
     panel: {
       header: {
         sec: 'Введите данные:',
@@ -1342,7 +1352,9 @@ const langUAOne = {
     register: 'Зареєструватися',
     save: 'Зберігти зміни',
     upload: 'Завантажити',
-    volunteer: 'Волонтер'
+    volunteer: 'Волонтер',
+    toAcc: 'В особистий кабінет',
+    toTask: 'До пошуку задач'
   },
   categories: {
     organization: 'Категорії завдань організації'
@@ -1373,7 +1385,8 @@ const langUAOne = {
   email: {
     name: 'Email',
     info: 'Ми будемо відправляти підтвердження і повідомлення на пошту.',
-    error: 'Повинен містити "@". Приклад mail@mail.com'
+    error: 'Повинен містити "@". Приклад mail@mail.com',
+    login: 'Введіть email, вказаний при реєстрації'
   },
   first: {
     name: 'Ім\'я'
@@ -1431,6 +1444,7 @@ const langUAOne = {
     },
     enter: 'Увійти',
     forgotPassword: 'Забули пароль?',
+    loginTitle: 'Вхід в особистий кабінет',
     help: 'Допомога',
     inprogress: {
       tasks: 'Завдання в роботі'
@@ -1714,6 +1728,7 @@ const langUATwo = {
   registration: {
     confirmed: 'Ваш email підтверджено!',
     notconfirmed: 'Ваш email не підтверджено!',
+    info: 'Тепер ви можете переглядати і відгукуватися на завдання організацій.',
     panel: {
       header: {
         sec: 'Введіть данні:',

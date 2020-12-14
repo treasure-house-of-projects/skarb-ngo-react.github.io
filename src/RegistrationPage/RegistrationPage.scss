@@ -1,0 +1,70 @@
+.login_page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100% - 129px);
+    background: url('../Puzzle2.png') right top no-repeat, url('../Puzzle3.png') left bottom no-repeat;
+    background-size: 100%;
+
+    &__info {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 20px;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 30px;
+    }
+
+    &__choise {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .submit-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        width: 150px;
+        margin: 30px auto;
+        border-radius: 22px;
+        text-decoration: none;
+    }
+
+    &__select {
+        &_label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: #FFF;
+            margin: 30px;
+            border: 1px solid #AE2342;
+            font-weight: bold;
+            font-size: 20px;
+            width: 221px;
+            height: 71px;
+            color: #000000;
+            border-radius: 22px;
+            letter-spacing: -0.015em;
+            
+            &:hover {
+                background-color: #FFF6F8;
+            }
+        }
+    
+        &[type="radio"]{
+            visibility: hidden;
+            height: 0;
+            width: 0;
+
+            &:checked + label{
+                background: linear-gradient(90deg, rgb(99, 90, 142) 0%, rgb(215, 21, 65) 100%);
+                color: white;
+            }
+        }
+    }
+}

@@ -66,7 +66,7 @@ function VolunteerRegistration({localization}) {
             password: encrypt(password),
             phone: phone === "" ? null : phone,
             sex: sex
-        })
+        }, {headers: {"Frontend-Identifier": "ngo-frontend-react"}})
         .then((response) => {
             setCurrentStep(currentStep + 1)
         })
