@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.bc1520a9.chunk.css",
+    "main.js": "/static/js/main.3a9ecc75.chunk.js",
+    "main.js.map": "/static/js/main.3a9ecc75.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9cd74ed7.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9cd74ed7.js.map",
+    "static/js/2.94871a94.chunk.js": "/static/js/2.94871a94.chunk.js",
+    "static/js/2.94871a94.chunk.js.map": "/static/js/2.94871a94.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.bc1520a9.chunk.css.map": "/static/css/main.bc1520a9.chunk.css.map",
+    "static/js/2.94871a94.chunk.js.LICENSE.txt": "/static/js/2.94871a94.chunk.js.LICENSE.txt",
+    "static/media/MainPageContent.scss": "/static/media/Puzzle1.4f6da6ec.png",
+    "static/media/Advice.scss": "/static/media/Puzzle2.0b4a6e3b.png",
+    "static/media/LoginPage.scss": "/static/media/Puzzle3.daa1043b.png",
+    "static/media/ErrorPage.scss": "/static/media/Rectangle13.0952b532.png",
+    "static/media/logo_red_300px.1c389114.svg": "/static/media/logo_red_300px.1c389114.svg",
+    "static/media/puzzle.80875e7b.png": "/static/media/puzzle.80875e7b.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9cd74ed7.js",
+    "static/js/2.94871a94.chunk.js",
+    "static/css/main.bc1520a9.chunk.css",
+    "static/js/main.3a9ecc75.chunk.js"
+  ]
+}
